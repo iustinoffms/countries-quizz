@@ -4,25 +4,26 @@ export type OnChangeFn = (
   formKey: string
 ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 
-interface FormInputProps {
-  inputValue: string;
-  onChange: OnChangeFn;
+export interface FormInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  onInputChange: OnChangeFn;
   formKey: string;
   inputError: string;
+  label: string;
 }
 
 const FormInput = (props: FormInputProps) => {
-  const { inputValue, onChange, formKey, inputError } = props;
+  const { value, onInputChange, formKey, inputError, label, type } = props;
   return (
     <div className="flex flex-col">
-      <label htmlFor="email">Email </label>
+      <label htmlFor={formKey}>{label} </label>
       <input
         className="py-2 text-black rounded-sm"
-        type="text"
-        name="email"
-        id="email"
-        value={inputValue}
-        onChange={onChange(formKey)}
+        type={type}
+        name={formKey}
+        id={formKey}
+        value={value}
+        onChange={onInputChange(formKey)}
       />
       <div className="email-error">{inputError}</div>
     </div>

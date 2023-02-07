@@ -10,7 +10,7 @@ const useLogin = () => {
     },
   });
 
-  const onChange = (formKey: string) => {
+  const onInputChange = (formKey: string) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       setFormState((prevState) => {
         return { ...prevState, [formKey]: e.target.value };
@@ -60,6 +60,6 @@ const useLogin = () => {
     setFormError("password", "");
     return true;
   };
-  return { formState, onChange, validateEmail, validatePassword };
+  return { formState, onInputChange, validateEmail, validatePassword };
 };
 export default useLogin;

@@ -1,11 +1,11 @@
 import * as React from "react";
 import EmailField from "../EmailField/EmailField";
-import FormInput from "../FormInput/FormInput";
 import useLogin from "../hooks/useLogin";
 import PasswordField from "../PasswordField/PasswordField";
 
 const Login = () => {
-  const { formState, onChange, validateEmail, validatePassword } = useLogin();
+  const { formState, onInputChange, validateEmail, validatePassword } =
+    useLogin();
 
   const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,16 +23,18 @@ const Login = () => {
 
       <form className="flex flex-col gap-8" onSubmit={formSubmit}>
         <EmailField
-          inputValue={formState.email}
-          onChange={onChange}
+          value={formState.email}
+          onInputChange={onInputChange}
           formKey="email"
           inputError={formState.errors.email}
+          label="Email"
         />
         <PasswordField
-          inputValue={formState.password}
-          onChange={onChange}
+          value={formState.password}
+          onInputChange={onInputChange}
           formKey="password"
           inputError={formState.errors.password}
+          label="Password"
         />
         <input
           type="submit"

@@ -1,21 +1,17 @@
 import * as React from "react";
-import FormInput, { OnChangeFn } from "../FormInput/FormInput";
+import FormInput, { FormInputProps } from "../FormInput/FormInput";
 
-interface EmailFieldProps {
-  inputValue: string;
-  onChange: OnChangeFn;
-  formKey: string;
-  inputError: string;
-}
-const EmailField = (props: EmailFieldProps) => {
-  const { inputValue, onChange, formKey, inputError } = props;
+const EmailField = (props: FormInputProps) => {
+  const { value, onInputChange, formKey, inputError, label } = props;
 
   return (
     <FormInput
-      inputValue={inputValue}
-      onChange={onChange}
+      value={value}
+      onInputChange={onInputChange}
       formKey={formKey}
       inputError={inputError}
+      label={label}
+      type="email"
     />
   );
 };

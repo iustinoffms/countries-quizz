@@ -1,21 +1,16 @@
 import * as React from "react";
-import FormInput, { OnChangeFn } from "../FormInput/FormInput";
+import FormInput, { FormInputProps } from "../FormInput/FormInput";
 
-interface PasswordFieldProps {
-  inputValue: string;
-  onChange: OnChangeFn;
-  formKey: string;
-  inputError: string;
-}
-
-const PasswordField = (props: PasswordFieldProps) => {
-  const { inputValue, onChange, formKey, inputError } = props;
+const PasswordField = (props: FormInputProps) => {
+  const { value, onInputChange, formKey, inputError, label } = props;
   return (
     <FormInput
-      inputValue={inputValue}
-      onChange={onChange}
+      value={value}
+      onInputChange={onInputChange}
       formKey={formKey}
       inputError={inputError}
+      label={label}
+      type="password"
     />
   );
 };
