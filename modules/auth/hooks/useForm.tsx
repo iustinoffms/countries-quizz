@@ -1,14 +1,27 @@
 import * as React from "react";
 
-const useLogin = () => {
+export const useForm = () => {
   const [formState, setFormState] = React.useState({
     email: "",
+    username: "",
     password: "",
+    confirmPassword: "",
     errors: {
       email: "",
+      username: "",
       password: "",
+      confirmPassword: "",
     },
   });
+
+  const setFormError = (formKey: string, errorMessage: string) => {
+    setFormState((prevState) => {
+      return {
+        ...prevState,
+        errors: { ...prevState.errors, [formKey]: errorMessage },
+      };
+    });
+  };
 
   const onInputChange = (formKey: string) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,19 +31,9 @@ const useLogin = () => {
     };
   };
 
-  const setFormError = (errorKey: string, errorMessage: string) => {
-    setFormState((prevState) => {
-      return {
-        ...prevState,
-        errors: { ...prevState.errors, [errorKey]: errorMessage },
-      };
-    });
-  };
-
   return {
     formState,
     onInputChange,
     setFormError,
   };
 };
-export default useLogin;

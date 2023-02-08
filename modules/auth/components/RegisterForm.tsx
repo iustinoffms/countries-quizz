@@ -1,24 +1,20 @@
 import React from "react";
 import EmailField from "components/EmailField/EmailField";
 import UsernameField from "components/UsernameField/UsernameField";
-import { useRegister } from "../hooks/useRegister";
+import { useForm } from "../hooks/useForm";
 import PasswordField from "components/PasswordField/PasswordField";
+import { createAuthValidators } from "../utils/validations";
 
 export const RegisterForm = () => {
-  const {
-    formState,
-    onInputChange,
-    validateEmail,
-    validateUsername,
-    validatePassword,
-    validateConfirmPassword,
-  } = useRegister();
+  const { formState, onInputChange, setFormError } = useForm();
   const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const validEmail = validateEmail(formState.email);
-    const validUsername = validateUsername(formState.username);
-    const validPassword = validatePassword(formState.password);
-    const validConfirmPass = validateConfirmPassword(
+    const validators = createAuthValidators(setFormError);
+
+    const validEmail = validators.validateEmail(formState.email);
+    const validUsername = validators.validateUsername(formState.username);
+    const validPassword = validators.validatePassword(formState.password);
+    const validConfirmPass = validators.validateConfirmPassword(
       formState.password,
       formState.confirmPassword
     );

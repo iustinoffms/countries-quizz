@@ -1,16 +1,18 @@
 import * as React from "react";
 import EmailField from "components/EmailField/EmailField";
-import useLogin from "../hooks/useLogin";
+import { useForm } from "../hooks/useForm";
 import PasswordField from "components/PasswordField/PasswordField";
+import { createAuthValidators } from "../utils/validations";
 
 export const LoginForm = () => {
-  const { formState, onInputChange, validateEmail, validatePassword } =
-    useLogin();
+  const { formState, onInputChange, setFormError } = useForm();
 
   const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const validEmail = validateEmail(formState.email);
-    const validPassword = validatePassword(formState.password);
+    const validators = createAuthValidators(setFormError);
+
+    const validEmail = validators.validateEmail(formState.email);
+    const validPassword = validators.validatePassword(formState.password);
 
     if (validEmail && validPassword) {
       console.log(formState);
