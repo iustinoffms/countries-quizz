@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const useLogin = () => {
+export const useLogin = () => {
   const [formState, setFormState] = React.useState({
     email: "",
     password: "",
