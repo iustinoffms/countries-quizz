@@ -1,9 +1,9 @@
 import * as React from "react";
-import EmailField from "../EmailField/EmailField";
+import EmailField from "components/EmailField/EmailField";
 import useLogin from "../hooks/useLogin";
-import PasswordField from "../PasswordField/PasswordField";
+import PasswordField from "components/PasswordField/PasswordField";
 
-const Login = () => {
+export const LoginForm = () => {
   const { formState, onInputChange, validateEmail, validatePassword } =
     useLogin();
 
@@ -38,13 +38,11 @@ const Login = () => {
         />
         <input
           type="submit"
-          name="register"
-          value="Register"
+          name="login"
+          value="Login"
           className="border-1 py-3 bg-sky-400 w-full cursor-pointer text-slate-900"
         />
       </form>
     </div>
   );
 };
-
-export default Login;

@@ -13,7 +13,8 @@ export interface FormInputProps
 }
 
 const FormInput = (props: FormInputProps) => {
-  const { value, onInputChange, formKey, inputError, label, type } = props;
+  const { value, onInputChange, formKey, inputError, label, type, ...rest } =
+    props;
   return (
     <div className="flex flex-col">
       <label htmlFor={formKey}>{label} </label>
@@ -24,6 +25,7 @@ const FormInput = (props: FormInputProps) => {
         id={formKey}
         value={value}
         onChange={onInputChange(formKey)}
+        {...rest}
       />
       <div className="email-error">{inputError}</div>
     </div>

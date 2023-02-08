@@ -2,7 +2,7 @@ import * as React from "react";
 import FormInput, { FormInputProps } from "../FormInput/FormInput";
 
 const PasswordField = (props: FormInputProps) => {
-  const { value, onInputChange, formKey, inputError, label } = props;
+  const { value, onInputChange, formKey, inputError, label, ...rest } = props;
   return (
     <FormInput
       value={value}
@@ -11,6 +11,7 @@ const PasswordField = (props: FormInputProps) => {
       inputError={inputError}
       label={label}
       type="password"
+      {...rest}
     />
   );
 };

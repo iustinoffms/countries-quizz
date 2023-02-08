@@ -1,7 +1,7 @@
 import * as React from "react";
 import FormInput, { FormInputProps } from "../FormInput/FormInput";
 
-const EmailField = (props: FormInputProps) => {
+const UsernameField = (props: FormInputProps) => {
   const { value, onInputChange, formKey, inputError, label, ...rest } = props;
 
   return (
@@ -17,4 +17,4 @@ const EmailField = (props: FormInputProps) => {
   );
 };
 
-export default EmailField;
+export default UsernameField;
