@@ -5,14 +5,18 @@ import PasswordField from "components/PasswordField/PasswordField";
 import { createAuthValidators } from "../utils/validations";
 
 export const LoginForm = () => {
-  const { formState, onInputChange, setFormError } = useForm();
+  const { formState, onInputChange, setFormError } = useForm({
+    values: { email: "", password: "" },
+  });
 
   const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validators = createAuthValidators(setFormError);
 
-    const validEmail = validators.validateEmail(formState.email);
-    const validPassword = validators.validatePassword(formState.password);
+    const validEmail = validators.validateEmail(formState.values.email);
+    const validPassword = validators.validatePassword(
+      formState.values.password
+    );
 
     if (validEmail && validPassword) {
       console.log(formState);
@@ -25,14 +29,14 @@ export const LoginForm = () => {
 
       <form className="flex flex-col gap-8" onSubmit={formSubmit}>
         <EmailField
-          value={formState.email}
+          value={formState.values.email}
           onInputChange={onInputChange}
           formKey="email"
           inputError={formState.errors.email}
           label="Email"
         />
         <PasswordField
-          value={formState.password}
+          value={formState.values.password}
           onInputChange={onInputChange}
           formKey="password"
           inputError={formState.errors.password}

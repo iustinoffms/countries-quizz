@@ -6,17 +6,23 @@ import PasswordField from "components/PasswordField/PasswordField";
 import { createAuthValidators } from "../utils/validations";
 
 export const RegisterForm = () => {
-  const { formState, onInputChange, setFormError } = useForm();
+  const { formState, onInputChange, setFormError } = useForm({
+    values: { email: "", username: "", password: "", confirmPassword: "" },
+  });
   const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validators = createAuthValidators(setFormError);
 
-    const validEmail = validators.validateEmail(formState.email);
-    const validUsername = validators.validateUsername(formState.username);
-    const validPassword = validators.validatePassword(formState.password);
+    const validEmail = validators.validateEmail(formState.values.email);
+    const validUsername = validators.validateUsername(
+      formState.values.username
+    );
+    const validPassword = validators.validatePassword(
+      formState.values.password
+    );
     const validConfirmPass = validators.validateConfirmPassword(
-      formState.password,
-      formState.confirmPassword
+      formState.values.password,
+      formState.values.confirmPassword
     );
     if (validEmail && validUsername && validPassword && validConfirmPass) {
       console.log(formState);
@@ -29,28 +35,28 @@ export const RegisterForm = () => {
 
       <form className="flex flex-col gap-8" onSubmit={formSubmit}>
         <EmailField
-          value={formState.email}
+          value={formState.values.email}
           onInputChange={onInputChange}
           formKey="email"
           label="Email"
           inputError={formState.errors.email}
         />
         <UsernameField
-          value={formState.username}
+          value={formState.values.username}
           onInputChange={onInputChange}
           formKey="username"
           label="Full Name"
           inputError={formState.errors.username}
         />
         <PasswordField
-          value={formState.password}
+          value={formState.values.password}
           onInputChange={onInputChange}
           formKey="password"
           label="Password"
           inputError={formState.errors.password}
         />
         <PasswordField
-          value={formState.confirmPassword}
+          value={formState.values.confirmPassword}
           onInputChange={onInputChange}
           formKey="confirmPassword"
           label="Confirm Password"

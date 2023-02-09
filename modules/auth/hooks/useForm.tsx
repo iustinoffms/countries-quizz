@@ -1,17 +1,23 @@
 import * as React from "react";
 
-export const useForm = () => {
-  const [formState, setFormState] = React.useState({
-    email: "",
-    username: "",
-    password: "",
-    confirmPassword: "",
-    errors: {
-      email: "",
-      username: "",
-      password: "",
-      confirmPassword: "",
-    },
+export interface UseFormConfig {
+  values: Record<string, any>;
+}
+export interface UseFormState {
+  values: Record<string, any>;
+  errors: Record<string, any>;
+}
+export const useForm = (config: UseFormConfig) => {
+  const [formState, setFormState] = React.useState<UseFormState>(() => {
+    const stateValues = Object.keys(config.values);
+    const errors = stateValues.reduce(
+      (acc, currentKey) => ({
+        ...acc,
+        [currentKey]: "",
+      }),
+      {}
+    );
+    return { values: config.values, errors };
   });
 
   const setFormError = (formKey: string, errorMessage: string) => {
@@ -26,7 +32,10 @@ export const useForm = () => {
   const onInputChange = (formKey: string) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       setFormState((prevState) => {
-        return { ...prevState, [formKey]: e.target.value };
+        return {
+          ...prevState,
+          values: { ...prevState.values, [formKey]: e.target.value },
+        };
       });
     };
   };
